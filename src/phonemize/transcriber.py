@@ -1,7 +1,8 @@
 import speech_recognition as sr
+from config.config import phonemize_config
 
 
-def transcribe_audio(audio_file, phoneme_language='en-us'):
+def transcribe_audio(audio_file, phoneme_language=phonemize_config['language']):
     """ Transcribe audio to text using Google's speech recognition service, adjusting the language based on phoneme settings. """
     recognizer = sr.Recognizer()
     with sr.AudioFile(audio_file) as source:

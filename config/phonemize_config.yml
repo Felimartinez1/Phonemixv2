@@ -1,0 +1,4 @@
+# phonemize config
+
+language: es
+backend: espeak

@@ -1,7 +1,7 @@
 from phonemizer import phonemize
+from config.config import phonemize_config
 
-
-def get_phonemes(text, language='en-us', backend='espeak'):
+def get_phonemes(text, language=phonemize_config['language'], backend=phonemize_config['backend']):
     """ Convert text to phonemes using the specified backend and language.
         language: 'es', 'en-us'
     """
