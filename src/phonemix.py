@@ -1,5 +1,4 @@
-from src.phonemize.transcriber import transcribe_audio
-from src.phonemize.analyzer import levenshtein_detailed, print_phonemes_with_indices, get_phonemes
+from src.phonemize.analyzer import levenshtein_detailed, print_phonemes_with_indices
 
 
 def provide_detailed_feedback(user_phonemes, correct_phonemes):
@@ -13,16 +12,3 @@ def provide_detailed_feedback(user_phonemes, correct_phonemes):
         "\nOperaciones necesarias:\n" + "\n".join(operations) if operations else "No se requieren cambios, la pronunciación es correcta."
     ]
     return "\n".join(feedback_lines)
-
-# Ejemplo de uso
-if __name__ == "__main__":
-    audio_file = "output_file.wav"
-    transcribed_text = transcribe_audio(audio_file)
-    expected_text = "I want to be the champion of the American Cup again the last Di Maria's match"
-    print(f'transcribed text: ', transcribed_text)
-    print(f'expected text: ', expected_text)
-    user_phonemes = get_phonemes(transcribed_text)
-    correct_phonemes = get_phonemes(expected_text)
-
-    feedback = provide_detailed_feedback(user_phonemes, correct_phonemes)
-    print(feedback)
