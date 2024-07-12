@@ -1,5 +1,5 @@
-from src.transcriber import transcribe_audio
-from src.analyzer import levenshtein_detailed, print_phonemes_with_indices, get_phonemes
+from src.phonemize.transcriber import transcribe_audio
+from src.phonemize.analyzer import levenshtein_detailed, print_phonemes_with_indices, get_phonemes
 
 
 def provide_detailed_feedback(user_phonemes, correct_phonemes):
