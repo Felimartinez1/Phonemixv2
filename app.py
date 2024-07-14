@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, Response
+from fastapi.middleware.cors import CORSMiddleware
 from src.phonemize.analyzer import get_phonemes
 from src.phonemize.transcriber import transcribe_audio
 from src.phonemix import provide_detailed_feedback
@@ -8,6 +9,13 @@ import base64
 from io import BytesIO
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins="*",
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def home():
