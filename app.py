@@ -22,7 +22,7 @@ async def home():
     return {"message": "Welcome to the Pronunciation Feedback API"}
 
 @app.post("/feedback/")
-async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str, language: str):
+async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str = "", language: str = ""):
     print(file, expected_text, language) 
     # Read the content of the loaded file and convert it to an in-memory stream
     file_content = await file.read()
