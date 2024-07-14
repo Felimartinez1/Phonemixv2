@@ -3,5 +3,5 @@ phonemizer
 # backend: !sudo apt-get install espeak
 uvicorn
 fastapi
-yaml
+PyYAML
 gtts
