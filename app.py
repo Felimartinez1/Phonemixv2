@@ -11,18 +11,17 @@ app = FastAPI()
 
 @app.post("/feedback/")
 async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str = "", language: str = "es"):
-    # Save the uploaded file
-    
-    # Leer el contenido del archivo cargado y convertirlo en un stream en memoria
+        
+    # Read the content of the loaded file and convert it to an in-memory stream
     file_content = await file.read()
     user_audio_stream = BytesIO(file_content)
     
-    # Guardar temporalmente el archivo para procesamiento
+    # Temporarily save the file for processing
     audio_file = f"/tmp/{file.filename}"
     with open(audio_file, "wb") as f:
         f.write(file_content)
         
-    # Convertir el audio del usuario a base64
+    # Convertir user audio to base64
     user_audio_base64 = base64.b64encode(user_audio_stream.getvalue()).decode('utf-8')
 
     # Transcribe the audio file and get phonemes
