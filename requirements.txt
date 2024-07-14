@@ -4,3 +4,4 @@ phonemizer
 uvicorn
 fastapi
 yaml
+gtts
