@@ -11,7 +11,7 @@ app = FastAPI()
 
 @app.get("/")
 async def home():
-        return {"message": "Welcome to the Pronunciation Feedback API"}
+    return {"message": "Welcome to the Pronunciation Feedback API"}
 
 @app.post("/feedback/")
 async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str = "", language: str = "es"):
