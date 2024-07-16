@@ -38,16 +38,12 @@ async def pronunciation_feedback(file: UploadFile = File(...), expected_text: st
         audio_file = f"/tmp/{file.filename}.wav"
         audio_segment.export(audio_file, format="wav")
 
-        # Convertir user audio to base64
-        user_audio_base64 = base64.b64encode(file_content).decode('utf-8')
-
         # Transcribe the audio file and get phonemes
         transcribed_text = transcribe_audio(audio_file, language)
         user_phonemes = get_phonemes(transcribed_text, language)
 
         # Generate expected audio and convert it to base64
         expected_audio_stream = text_to_speech(expected_text, language)
-        expected_audio_base64 = base64.b64encode(expected_audio_stream.read()).decode('utf-8')
 
         correct_phonemes = get_phonemes(expected_text, language)
 
@@ -58,11 +54,9 @@ async def pronunciation_feedback(file: UploadFile = File(...), expected_text: st
         os.remove(audio_file)
 
         return {
-            "user_audio": "data:audio/mpeg;base64," + user_audio_base64,
             "user_text": transcribed_text,
             "user_phonemes": user_phonemes,
-            "expected_audio": "data:audio/mpeg;base64," + expected_audio_base64,
-            "expected_text": expected_text,
+            "expected_audio": expected_audio_stream,
             "expected_phonemes": correct_phonemes,
             "feedback": feedback
         }
