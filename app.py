@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, Response, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from src.phonemize.analyzer import get_phonemes
 from src.phonemize.transcriber import transcribe_audio
@@ -24,7 +24,10 @@ async def home():
     return {"message": "Welcome to the Pronunciation Feedback API"}
 
 @app.post("/feedback/")
-async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str = "", language: str = "es"):
+async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str = Form(...), language: str = Form("es")):
+    if not expected_text:
+        raise HTTPException(status_code=400, detail="Expected text is required.")
+    
     try:
         # Read the content of the loaded file and convert it to an in-memory stream
         file_content = await file.read()
