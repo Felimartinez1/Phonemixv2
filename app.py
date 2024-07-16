@@ -24,7 +24,7 @@ async def home():
     return {"message": "Welcome to the Pronunciation Feedback API"}
 
 @app.post("/feedback/")
-async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str = Form(...), language: str = Form("es")):
+async def pronunciation_feedback(file: UploadFile = File(...), expected_text: str = Form(...), language: str = Form(...)):
     if not expected_text:
         raise HTTPException(status_code=400, detail="Expected text is required.")
     
