@@ -1,7 +1,9 @@
 SpeechRecognition
 phonemizer
-# backend: !sudo apt-get install espeak
+# backend: sudo apt-get install espeak
 uvicorn
 fastapi
 PyYAML
 gtts
+pydub
+# sudo apt-get install ffmpeg
