@@ -67,4 +67,4 @@ async def pronunciation_feedback(file: UploadFile = File(...), expected_text: st
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="ec2-54-183-218-147.us-west-1.compute.amazonaws.com", port=8000)
+    uvicorn.run(app, host="ec2-52-8-119-197.us-west-1.compute.amazonaws.com", port=8000)
