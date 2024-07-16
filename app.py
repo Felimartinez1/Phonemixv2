@@ -44,6 +44,7 @@ async def pronunciation_feedback(file: UploadFile = File(...), expected_text: st
 
         # Generate expected audio and convert it to base64
         expected_audio_stream = text_to_speech(expected_text, language)
+        expected_audio_base64 = base64.b64encode(expected_audio_stream.read()).decode('utf-8')
 
         correct_phonemes = get_phonemes(expected_text, language)
 
@@ -56,9 +57,9 @@ async def pronunciation_feedback(file: UploadFile = File(...), expected_text: st
         return {
             "user_text": transcribed_text,
             "user_phonemes": user_phonemes,
-            "expected_audio": expected_audio_stream,
             "expected_phonemes": correct_phonemes,
-            "feedback": feedback
+            "feedback": feedback,
+            "expected_audio": "data:audio/mpeg;base64," + expected_audio_base64,
         }
 
     except Exception as e:
