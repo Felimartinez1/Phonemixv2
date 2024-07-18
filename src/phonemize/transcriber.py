@@ -23,10 +23,10 @@ def transcribe_audio(audio_file, phoneme_language=phonemize_config['language']):
                     return recognizer.recognize_google(audio_data, language='es-ES')
                 else:
                     return recognizer.recognize_google(audio_data)
-            except sr.UnknownValueError as e:
-                return f"Google Speech Recognition could not understand audio: {e}"
-            except sr.RequestError as e:
-                return f"Could not request results from Google Speech Recognition service; {e}"
+            except sr.UnknownValueError:
+                return f"Could not understand audio"
+            except sr.RequestError:
+                return f"Could not request results from the service"
     finally:
         # Clean up temporary file
         if os.path.exists(temp_file):
