@@ -2,3 +2,5 @@
 
 language: es
 backend: espeak
+unknownvalueerror: Google Speech Recognition could not understand audio
+requesterror: Could not request results from Google Speech Recognition service

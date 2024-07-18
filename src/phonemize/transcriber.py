@@ -3,6 +3,7 @@ import os
 import speech_recognition as sr
 from config.config import phonemize_config
 
+
 def convert_audio(input_file, output_file):
     """ Convert audio file to desired format using ffmpeg. """
     command = ['ffmpeg', '-i', input_file, '-acodec', 'pcm_s16le', '-ar', '16000', '-ac', '1', output_file, '-y']
@@ -21,12 +22,18 @@ def transcribe_audio(audio_file, phoneme_language=phonemize_config['language']):
             try:
                 if phoneme_language == 'es':
                     return recognizer.recognize_google(audio_data, language='es-ES')
-                else:
-                    return recognizer.recognize_google(audio_data)
+                elif phoneme_language == 'en':
+                    return recognizer.recognize_google(audio_data, language='en')
+                elif phoneme_language == 'it':
+                    return recognizer.recognize_google(audio_data, language='it')
+                elif phoneme_language == 'fr':
+                    return recognizer.recognize_google(audio_data, language='fr') 
+                elif phoneme_language == 'pt':
+                    return recognizer.recognize_google(audio_data, language='pt-br')
             except sr.UnknownValueError:
-                return f"Could not understand audio"
+                return phonemize_config['unknownvaluerror']
             except sr.RequestError:
-                return f"Could not request results from the service"
+                return phonemize_config['requesterror']
     finally:
         # Clean up temporary file
         if os.path.exists(temp_file):
