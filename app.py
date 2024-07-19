@@ -4,6 +4,7 @@ from src.phonemize.analyzer import get_phonemes
 from src.phonemize.transcriber import transcribe_audio
 from src.phonemix import provide_detailed_feedback
 from src.t2s.t2s import text_to_speech
+from src.lang_validation import validate_language
 import uvicorn
 import base64
 from io import BytesIO
@@ -63,7 +64,18 @@ async def pronunciation_feedback(file: UploadFile = File(...), expected_text: st
         }
 
     except Exception as e:
-        print(f"Error: {e}")  # Agregar más logs si es necesario
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/langvalidation/")
+async def language_validation(expected_text: str = Form(...), language: str = Form(...)):
+    try:
+        is_valid, validation_message = validate_language(expected_text, language)
+        if not is_valid:
+            raise HTTPException(status_code=400, detail=validation_message)
+        return {"message": validation_message}
+    except Exception as e:
+        print(f"Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

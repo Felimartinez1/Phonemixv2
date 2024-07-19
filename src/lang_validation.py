@@ -1,30 +1,23 @@
 from langdetect import detect, LangDetectException
 from config.config import phonemize_config
 
-def validar_idioma(texto, idioma_esperado):
+def validate_language(text, expected_language):
     try:
-        idioma_detectado = detect(texto)
+        detected_language = detect(text)
     except LangDetectException:
-        return False, "No se pudo detectar el idioma del texto."
+        return False, "Could not detect the language of the text."
     
-    idiomas = phonemize_config['lang_validation']
+    languages = phonemize_config['lang_validation']
     
-    idioma_esperado = idioma_esperado.lower()
+    expected_language = expected_language.lower()
     
-    if idioma_esperado not in idiomas.values():
-        return False, "Idioma no soportado."
+    if expected_language not in languages.values():
+        return False, "Unsupported language."
 
-    if idioma_detectado not in idiomas:
-        return False, f"Idioma detectado no soportado: {idioma_detectado}"
+    if detected_language not in languages:
+        return False, f"Detected language not supported: {detected_language}"
 
-    if idiomas[idioma_detectado] == idioma_esperado:
-        return True, "El texto coincide con el idioma esperado."
+    if languages[detected_language] == expected_language:
+        return True, "The text matches the expected language."
     else:
-        return False, f"El texto está en {idiomas[idioma_detectado]}, pero se esperaba {idioma_esperado}."
-
-# Ejemplo de uso
-idioma_usuario = "it"
-texto_usuario = "Hola, como estás, mi nombre es Felipe"
-
-resultado, mensaje = validar_idioma(texto_usuario, idioma_usuario)
-print(mensaje)
+        return False, f"The text is in {languages[detected_language]}, but {expected_language} was expected."
