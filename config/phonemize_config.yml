@@ -34,6 +34,18 @@ tld_map_t2s:
   ar: com.ar # argentina (es)
   us: us # united states (en)
   uk: co.uk # united kingdom (en)
+
+lang_validation:
+  es: es
+  es: es-la
+  en: en-us
+  en: en-gb
+  fr: fr-fr
+  de: de
+  it: it
+  pt: pt-pt
+  pt: pt-br
+
   
 unknownvalueerror: Google Speech Recognition could not understand audio
 
