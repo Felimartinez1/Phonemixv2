@@ -73,7 +73,7 @@ async def language_validation(expected_text: str = Form(...), language: str = Fo
         is_valid, validation_message = validate_language(expected_text, language)
         if not is_valid:
             raise HTTPException(status_code=400, detail=validation_message)
-        return {"message": validation_message}
+        return {"status": is_valid, "message": validation_message}
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
