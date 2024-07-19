@@ -1,6 +1,6 @@
 import os
 import speech_recognition as sr
-from utils.audio_preprocess import convert_audio
+from phonemize.utils.audio_preprocess import convert_audio
 from config.config import phonemize_config
 
 
