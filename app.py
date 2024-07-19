@@ -63,9 +63,11 @@ async def pronunciation_feedback(file: UploadFile = File(...), expected_text: st
             "expected_audio": "data:audio/mpeg;base64," + expected_audio_base64,
         }
 
+    except ValueError as e:
+        raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="An unexpected error occurred.")
     
 @app.post("/langvalidation/")
 async def language_validation(expected_text: str, language: str):
