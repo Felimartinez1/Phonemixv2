@@ -8,4 +8,3 @@ gtts
 pydub
 # sudo apt-get install ffmpeg
 langdetect
-pydub
